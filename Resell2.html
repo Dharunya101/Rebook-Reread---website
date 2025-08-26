@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details Form</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Times New Roman', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://channelreplys4.s3.amazonaws.com/uploads/sources/Huge_Stacks_of_Books.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.8; 
+        }
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        .form-container {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px solid black;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        .form-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        form {
+            display: inline-block;
+            text-align: left;
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: 300px;
+            font-size: 16px;
+            border: 1px solid black;
+            margin-bottom: 15px;
+            padding: 8px;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+        input[type="text"]:hover,
+        select:hover,
+        textarea:hover {
+            border-color: DodgerBlue;
+            background-color: #f0f8ff;
+        }
+        button {
+            width: 300px;
+            height: 40px;
+            font-size: 16px;
+            border: 1px solid black;
+            background-color: LightSteelBlue;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        button:hover {
+            background-color: DodgerBlue;
+            color: white;
+        }
+
+        /* Success message styling */
+        .success-message {
+            color: green;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-image"></div>
+    <div class="background-overlay"></div>
+
+    <div class="form-container">
+        <h2>Book Details</h2>
+        <form id="resellForm" onsubmit="submitForm(event)">
+            <label for="bname">Book Name:</label><br>
+            <input type="text" id="bname" name="bname" placeholder="Your book name.." required><br><br>
+
+            <label for="bauthor">Book Author:</label><br>
+            <input type="text" id="bauthor" name="bauthor" placeholder="Your book author.." required><br><br>
+
+            <label for="bgenre">Book Genre:</label><br>
+            <select id="bgenre" name="bgenre" required>
+                <option value="">Select Genre</option>
+                <option value="Fiction">Fiction</option>
+                <option value="Non-fiction">Non-fiction</option>
+                <option value="Mystery">Mystery</option>
+                <option value="Romance">Romance</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Young adult">Young Adult</option>
+            </select><br><br>
+
+            <label for="bcondn">Book Condition:</label><br>
+            <select id="bcondn" name="bcondn" required>
+                <option value="">Select Condition</option>
+                <option value="Excellent">Excellent</option>
+                <option value="Good">Good</option>
+                <option value="Fair">Fair</option>
+            </select><br><br>
+
+            <label for="bqty">Quantity Available:</label><br>
+            <input type="text" id="bqty" name="bqty" required><br><br>
+
+            <label for="bpay">Payment Method:</label><br>
+            <select id="bpay" name="bpay" required>
+                <option value="">Select Payment Method</option>
+                <option value="UPI Number">UPI Number</option>
+                <option value="Bank account">Bank Account</option>
+            </select><br><br>    
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <!-- Success message will appear here after form submission -->
+        <div id="successMessage" class="success-message" style="display: none;">
+            Form submitted successfully!
+        </div>
+    </div>
+
+    <script>
+        // Submit the form data via Fetch API
+        function submitForm(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Gather form data using FormData
+            const formData = new FormData(document.getElementById('resellForm'));
+            const data = {
+                bname: formData.get('bname'),
+                bauthor: formData.get('bauthor'),
+                bgenre: formData.get('bgenre'),
+                bcondn: formData.get('bcondn'),
+                bqty: formData.get('bqty'),
+                bpay: formData.get('bpay')
+            };
+
+            // Validate form before sending data
+            if (validateForm(data)) {
+                // Send the form data to the server via a POST request
+                fetch('/post2', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Show success message after successful submission
+                    document.getElementById('successMessage').style.display = 'block';
+                    console.log("Success:", data);
+                });
+            }
+        }
+
+        // Form validation function
+        function validateForm(data) {
+            if (!data.bname) {
+                alert('Book Name is required.');
+                return false;
+            }
+            if (!data.bauthor) {
+                alert('Book Author is required.');
+                return false;
+            }
+            if (!data.bgenre) {
+                alert('Please select a Book Genre.');
+                return false;
+            }
+            if (!data.bcondn) {
+                alert('Please select a Book Condition.');
+                return false;
+            }
+            if (!data.bqty || isNaN(data.bqty) || Number(data.bqty) <= 0) {
+                alert('Please enter a valid Quantity.');
+                return false;
+            }
+            if (!data.bpay) {
+                alert('Please select a Payment Method.');
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
