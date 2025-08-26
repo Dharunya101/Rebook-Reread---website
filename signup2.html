@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style> 
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Times New Roman', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://media.licdn.com/dms/image/v2/C4E12AQFYyQ81_sDF6w/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1635879762718?e=2147483647&v=beta&t=FzLKFBnDA8CfF2IBITQ_MzBE7Tm3nDdrHW6wjbiH_FQ');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.8;
+        }
+
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .form-container {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px solid black;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .form-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        form {
+            display: inline-block;
+            text-align: left;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="password"] {
+            width: 300px;
+            height: 30px;
+            font-size: 16px;
+            border: 1px solid black;
+            margin-bottom: 15px;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        input[type="text"]:hover,
+        input[type="email"]:hover,
+        input[type="tel"]:hover,
+        input[type="password"]:hover {
+            border-color: DodgerBlue;
+            background-color: #f0f8ff;
+        }
+
+        button {
+            width: 300px;
+            height: 40px;
+            font-size: 16px;
+            border: 1px solid black;
+            background-color: LightSteelBlue;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: DodgerBlue;
+            color: white;
+        }
+    </style>
+<script>
+// Attach this script inside a <script> tag at the end of the HTML body or in an external JS file
+
+// Function to validate the form
+function validateForm(event) {
+    // Prevent default form submission
+    event.preventDefault();
+
+    // Get form fields
+    const username = document.getElementById('username').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const keepSignedIn = document.getElementById('keep_signed_in').checked;
+
+    // Regex patterns
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const phonePattern = /^[0-9]{10}$/; // Adjust as needed for international formats
+    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; // Minimum 8 characters, at least 1 letter and 1 number
+
+    // Validation checks
+    if (username.length < 3) {
+        alert('Username must be at least 3 characters long.');
+        return;
+    }
+
+    if (!emailPattern.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+
+    if (!phonePattern.test(phone)) {
+        alert('Please enter a valid 10-digit phone number.');
+        return;
+    }
+
+    if (!passwordPattern.test(password)) {
+        alert('Password must be at least 8 characters long, include at least one letter and one number.');
+        return;
+    }
+
+    alert('Form submitted successfully!');
+    // Submit the form programmatically
+    event.target.submit();
+}
+
+// Attach the event listener to the form
+const form = document.querySelector('form');
+form.addEventListener('submit', validateForm);
+</script>
+</head>
+<body>
+    <div class="background-image"></div>
+    <div class="background-overlay"></div>
+
+    <div class="form-container">
+        <h2>Sign Up</h2>
+        <form action="/post" method="POST" onsubmit="return validateForm(event)">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" required><br><br>
+
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="phone">Phone Number:</label><br>
+            <input type="tel" id="phone" name="phone" required><br><br>
+
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" required><br><br>
+
+            <input type="checkbox" id="keep_signed_in" name="keep_signed_in">
+            <label for="keep_signed_in">Keep me signed in</label><br><br>
+
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+</body>
+</html>
