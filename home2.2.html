@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to RebookReread</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://images4.alphacoders.com/132/1326368.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #333;
+        }
+
+        /* Header */
+        .header {
+            background-color: rgba(51, 51, 51, 0.8);
+            color: #fff;
+            padding: 1rem 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        /* Navigation */
+        nav {
+            text-align: center;
+            background-color: rgba(245, 235, 224, 0.9);
+            padding: 1rem;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        nav li {
+            position: relative;
+        }
+
+        nav a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            display: block;
+        }
+
+        nav a:hover {
+            color: #555;
+        }
+
+
+        /* Container */
+        .container {
+            padding: 3;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* Introduction Section */
+        .introduction {
+            margin-bottom: 4;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #000000;
+            font-weight: bold;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        /* Features Section */
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-item {
+            flex: 1 1 200px;
+            background-color: #fff;
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-item p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .feature-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* About Us and Featured Arrivals Sections */
+        .about,
+        .featured-arrivals {
+            margin-bottom: 2rem;
+            background-color: #deb6a0;
+            padding: 2.7rem;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(47, 43, 43, 0.1);
+        }
+
+        .about p,
+        .featured-arrivals p {
+            margin: 1rem 0;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Button */
+        .button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin-top: 1rem;
+            background-color: #333;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #61757d;
+        }
+
+        /* Dropdown Menu */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: rgba(245, 235, 224, 0.9);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            min-width: 150px;
+        }
+
+        .dropdown-content a {
+            padding: 10px 20px;
+            white-space: nowrap;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgba(240, 240, 240, 1);
+        }
+
+        nav li:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Container */
+        .container {
+            padding: 3rem;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        /* Button */
+        .button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin-top: 1rem;
+            background-color: #333;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #61757d;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>Welcome to RebookReread</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="home2.2.html">Home</a></li>
+            <li><a href="signup2.html">Sign Up</a></li>
+            <li>
+                <a href="#">Categories</a>
+                <ul class="dropdown-content">
+                    <li><a href="romance.html">Romance</a></li>
+                    <li><a href="travel.html">Travel</a></li>
+                    <li><a href="fantasy.html">Fantasy</a></li>
+                    <li><a href="mystery.html">Mystery</a></li>
+                    <li><a href="business.html">Business</a></li>
+                </ul>
+            </li>
+            <li><a href="review.html">Reviews</a></li>
+            <li><a href="Resell2.html">Resell</a></li>
+            
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Introduction Section -->
+        <section class="introduction">
+            <p><u>From Dusty Shelves to Fresh Starts</u></p>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="feature-item">
+                <h3>Fast Delivery</h3>
+                <p>Get your books quickly with our fast, reliable delivery service. Your next great read is just a few clicks away!</p>
+            </div>
+            <div class="feature-item">
+                <h3>24/7 Customer Service</h3>
+                <p>Our team is here to help around the clock. Have questions or need recommendations? We’re just a message away.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Resell</h3>
+                <p>Looking forward to reselling your books? We’ve got everything settled in one place.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Secure Payment</h3>
+                <p>Shop with confidence. Our payment system is secure, ensuring your information stays safe.</p>
+            </div>
+        </section>
+
+<section class="about">
+            <h2 class="section-title">About Us</h2>
+            <p>Welcome to RebookReread, your premier destination for buying and selling pre-loved books! We are passionate about connecting readers with the stories they love while promoting sustainability through the resale of books. At RebookReread, we believe that every book has a story to tell—both on its pages and in its journey. Our platform allows you to find great deals on quality used books, while also giving you the opportunity to pass along your own cherished reads to fellow book lovers. We strive to create a community where every book can find a new home, and where readers can discover hidden gems at affordable prices. Join us in celebrating the joy of reading, reusing, and recycling! Happy browsing and happy reading!</p>
+            <a href="faq.html" class="button">FAQs</a>
+        </section>
+
+
+        <!-- Featured Arrivals Section -->
+        <section class="featured-arrivals">
+            <h2 class="section-title">Featured Arrivals</h2>
+            <p>Discover the latest arrivals handpicked by our team. Each title is chosen for its unique voice and story, waiting to capture your imagination.</p>
+            <a href="signup2.html" class="button">Join Our Newsletter</a>
+        </section>
+    </div>
+
+</body>
+</html>
